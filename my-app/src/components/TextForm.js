@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 
 export default function TextForm({heading}) {
     const [text, setText] = useState("enter text here: ");
-
+    setText("Text2");
   return (
     <div>
       <form>
