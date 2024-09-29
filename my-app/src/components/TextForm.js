@@ -4,10 +4,7 @@ export default function TextForm({heading}) {
     const [text, setText] = useState("Enter text here:");
    // setText("Text2");
    
-   const handleOnFocus =()=> {
-       setText("");
-   }
-   const handleOnChange = (event)=>{
+     const handleOnChange = (event)=>{
       setText(event.target.value);
    }
 
@@ -21,26 +18,47 @@ export default function TextForm({heading}) {
     setText(newText);
    }
 
-   const handleSentenceClick = ()=>{
- 
+   const handleCapitalizedClick = ()=>{
     setText(   
       text.split(" ").map(x =>{
         return x.charAt(0).toUpperCase() + x.slice(1).toLowerCase();
         
       }).join(" "));
    }
+
+   const handleSentenceClick = ()=>{      
+      setText(text.split(".").map(x=>{
+        return x.charAt(0).toUpperCase() + x.slice(1).toLowerCase();
+      }).join(". "));
+   }
+
+   const handleAlternatingClick = ()=>{
+      console.log(text.split(" ").join(""));
+      for(let i=0;i<text.split("").length;i++){
+        if(i%2===0){
+        setText(text.split(" ").join("").toLowerCase());
+        }
+        else{
+          setText(text.split(" ").join("").toUpperCase());
+        }
+      }
+
+   }
+
   return (
   <>
     <div>
      
      <div className="mb-3">
          <h1>{heading}</h1>
-         <textarea  className="form-control" id="myBox" rows="8" value={text} onFocus={handleOnFocus} onChange={handleOnChange}></textarea>
+         <textarea  className="form-control" id="myBox" rows="8" value={text} onChange={handleOnChange}></textarea>
      </div>
 
-     <button className="btn btn-primary mx-2" onClick={handleUpperClick}>Convert to Uppercase</button>
-     <button className="btn btn-primary mx-2" onClick={handleLowerClick}>Convert to Lowercase</button>
-      <button className="btn btn-primary mx-2" onClick={handleSentenceClick}>Convert to Sentencecase</button>
+     <button className="btn btn-primary mx-2" onClick={handleUpperClick}>UPPERCASE</button>
+     <button className="btn btn-primary mx-2" onClick={handleLowerClick}>lowercase</button>
+     <button className="btn btn-primary mx-2" onClick={handleCapitalizedClick}>Capitalized Case</button>
+     <button className="btn btn-primary mx-2" onClick={handleSentenceClick}>Sentence case</button>
+     <button className="btn btn-primary mx-2" onClick={handleAlternatingClick}>aLtErNaTiNg cAsE</button>
 
 
 </div>
